@@ -6,4 +6,4 @@ aerich init-db
 
 sleep 5
 
-gunicorn --bind 0.0.0.0:80 app.main:app -w 2 -k uvicorn.workers.UvicornWorker
+gunicorn --bind 0.0.0.0:8000 app.main:app -w 2 -k uvicorn.workers.UvicornWorker

@@ -37,7 +37,7 @@ services:
         build:
             context: .
         expose:
-            - 80
+            - 8000
         environment:
             - DB_USERNAME=fastapiclassuser
             - DB_PASSWORD=areallyhardpassword123

@@ -11,7 +11,7 @@ RUN poetry config virtualenvs.create false && poetry install --no-dev --no-inter
 
 COPY . ./
 
-EXPOSE 80
+EXPOSE 8000
 
 RUN chmod 777 ./initialize.sh 
 
