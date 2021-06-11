@@ -1,0 +1,4 @@
+migrations/
+.git/
+.venv/
+docker-compose.yaml

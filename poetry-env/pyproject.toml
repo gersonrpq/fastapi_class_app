@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "poetry-env"
+version = "0.1.0"
+description = ""
+authors = ["Gerson Perdomo <ing.gersonp@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+uvicorn = "^0.14.0"
+fastapi = "^0.65.2"
+tortoise-orm = {extras = ["asyncpg"], version = "^0.17.4"}
+aerich = "^0.5.3"
+aiohttp = "^3.7.4"
+Jinja2 = "^3.0.1"
+gunicorn = "^20.1.0"
+pydantic = {extras = ["email"], version = "^1.8.2"}
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

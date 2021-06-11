@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+    db:
+        image: postgres:latest
+        expose:
+            - 5432
+        environment:
+            - POSTGRES_USER=fastapiclassuser
+            - POSTGRES_PASSWORD=areallyhardpassword123
+            - POSTGRES_DB=profiles
+    app:
+        build:
+            context: .
+        ports:
+            - 80:80
+        environment:
+            - DB_USERNAME=fastapiclassuser
+            - DB_PASSWORD=areallyhardpassword123
+            - DB_NAME=profiles
+            - DB_HOST=db
+            - DB_PORT=5432
+        depends_on:
+            - db
