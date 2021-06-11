@@ -46,6 +46,6 @@ services:
             - DB_PORT=5432
             - VIRTUAL_HOST=gersonrpq.com
             - LETSENCRYPT_HOST=gersonrpq.com
-            - LETSENCRYPT_EMAIL=gersonrpq.com
+            - LETSENCRYPT_EMAIL=ing.gersonp@gmail.com
         depends_on:
             - db
