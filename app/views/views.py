@@ -21,6 +21,7 @@ async def get_profile_info(request: Request, username: str):
     if profile:
         return templates.TemplateResponse('index.html', {'request': request, **profile.to_dict()})
     else:
+        request.status_code = status.HTTP_404_NOT_FOUND
         return templates.TemplateResponse('404.html', {'request': request})
 
 @profiles_router.delete('/{username}', response_model=DeletionResponse,
