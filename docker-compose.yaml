@@ -1,6 +1,29 @@
 version: "3"
 
 services:
+    nginx-proxy:
+        image: jwilder/nginx-proxy
+        restart: always
+        ports:
+          - "80:80"
+          - "443:443"
+        volumes:
+          - /var/run/docker.sock:/tmp/docker.sock:ro
+          - /var/certs:/etc/nginx/certs:ro
+          - /etc/nginx/vhost.d
+          - /usr/share/nginx/html
+        labels:
+          - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+    
+    letsencrypt:
+        image: jrcs/letsencrypt-nginx-proxy-companion
+        restart: always
+        volumes:
+          - /var/certs:/etc/nginx/certs:rw
+          - /var/run/docker.sock:/var/run/docker.sock:ro
+        volumes_from:
+          - nginx-proxy:rw
+    
     db:
         image: postgres:latest
         expose:
@@ -9,16 +32,20 @@ services:
             - POSTGRES_USER=fastapiclassuser
             - POSTGRES_PASSWORD=areallyhardpassword123
             - POSTGRES_DB=profiles
+    
     app:
         build:
             context: .
-        ports:
-            - 80:80
+        expose:
+            - 80
         environment:
             - DB_USERNAME=fastapiclassuser
             - DB_PASSWORD=areallyhardpassword123
             - DB_NAME=profiles
             - DB_HOST=db
             - DB_PORT=5432
+            - VIRTUAL_HOST=gersonrpq.com
+            - LETSENCRYPT_HOST=gersonrpq.com
+            - LETSENCRYPT_EMAIL=gersonrpq.com
         depends_on:
             - db
